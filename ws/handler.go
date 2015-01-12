@@ -1,13 +1,13 @@
 package ws
 
 import (
-	"bitbucket.org/anarcher/ansible-prototype"
-	"bitbucket.org/anarcher/ansible-prototype/router"
+	"encoding/json"
+	"github.com/ansible-in/prototype-anarcher"
+	"github.com/ansible-in/prototype-anarcher/router"
 	"github.com/gorilla/mux"
 	"github.com/igm/pubsub"
 	"gopkg.in/igm/sockjs-go.v2/sockjs"
 	"log"
-    "encoding/json"
 
 	r "github.com/dancannon/gorethink"
 )
@@ -15,7 +15,7 @@ import (
 var chat pubsub.Publisher
 
 type Content struct {
-    Id  string  `gorethink:"id,omitempty" json:"id,omitempty"`
+	Id       string `gorethink:"id,omitempty" json:"id,omitempty"`
 	Username string `json:"username"`
 	Message  string `json:"message"`
 }
@@ -66,12 +66,12 @@ func wsHandler(session sockjs.Session) {
 				continue
 			}
 
-            dbSession := ansible.DBSessions[0]
-            _, err = r.Db(ansible.DB_NAME).Table(ansible.T_MESSAGES).Insert(c).RunWrite(dbSession)
-            if err != nil {
-                //TODO
-                log.Println(err)
-            }
+			dbSession := ansible.DBSessions[0]
+			_, err = r.Db(ansible.DB_NAME).Table(ansible.T_MESSAGES).Insert(c).RunWrite(dbSession)
+			if err != nil {
+				//TODO
+				log.Println(err)
+			}
 
 			chat.Publish(c)
 			continue

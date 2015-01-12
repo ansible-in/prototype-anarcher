@@ -1,23 +1,23 @@
 package router
 
 import (
-    "github.com/gorilla/mux"
-    "path/filepath"
-    "net/http"
+	"github.com/gorilla/mux"
 	"go/build"
-    "os"
-    "log"
+	"log"
+	"net/http"
+	"os"
+	"path/filepath"
 )
 
 var (
-	StaticDir = filepath.Join(defaultBase("bitbucket.org/anarcher/ansible-prototype"), "static")
+	StaticDir = filepath.Join(defaultBase("github.com/ansible-in/prototype-anarcher"), "static")
 )
 
 func WEB() *mux.Router {
-    m := mux.NewRouter()
-    m.PathPrefix("/").Handler(http.FileServer(http.Dir(StaticDir)))
+	m := mux.NewRouter()
+	m.PathPrefix("/").Handler(http.FileServer(http.Dir(StaticDir)))
 
-    return m
+	return m
 }
 
 func defaultBase(path string) string {
@@ -38,4 +38,3 @@ func defaultBase(path string) string {
 
 	return p.Dir
 }
-
