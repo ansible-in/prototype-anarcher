@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
-	"github.com/anaible-in/prototype-anarcher/web"
-	"github.com/anaible-in/prototype-anarcher/ws"
 	"github.com/ansible-in/prototype-anarcher"
+	"github.com/ansible-in/prototype-anarcher/web"
+	"github.com/ansible-in/prototype-anarcher/ws"
 	"log"
 	"net/http"
 )
