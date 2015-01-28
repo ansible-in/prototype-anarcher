@@ -8,7 +8,7 @@ api:
     build: .
     command: go run src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/main.go 
     volumes:
-        - ../../../:/gopath/src
+        - ../../../:/go/src
     links:
         - db
     ports:
