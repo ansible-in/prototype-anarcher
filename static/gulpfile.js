@@ -24,7 +24,7 @@ var paths = {
 // Dependency tasks should call the callback to tell the parent task that
 // they're done.
 gulp.task('clean',function(done) {
-    del(["build"],done);
+    del(["dest"],done);
 });
 
 //Html task (minify?)
@@ -65,10 +65,14 @@ gulp.task('watch',function() {
 gulp.task('webserver',function() {
     connect.server({
         root: "dest",
+        port: 6000,
         fallback: "dest/index.html",
         livereload: true
     });
 });
+
+//Build
+gulp.task('build',['css','js','html']);
 
 //The default task (called when we run `gulp` from cli)
 gulp.task('default',['webserver','watch','css','js','html']);
