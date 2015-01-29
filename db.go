@@ -10,10 +10,10 @@ import (
 var DBSessions []*r.Session
 
 const (
-    DB_NAME = "ansible"
-    T_MESSAGES = "messages"
-    T_CHANNELS = "channels"
-    T_USERS  = "users"
+	DB_NAME    = "ansible"
+	T_MESSAGES = "messages"
+	T_CHANNELS = "channels"
+	T_USERS    = "users"
 )
 
 func InitDB() {
@@ -39,7 +39,7 @@ func InitDB() {
 	}
 
 	//Tables
-	tableNames := []string{T_MESSAGES,T_USERS,T_CHANNELS}
+	tableNames := []string{T_MESSAGES, T_USERS, T_CHANNELS}
 	for _, tableName := range tableNames {
 		err = r.Db(DB_NAME).TableCreate(tableName).Exec(session)
 		if err != nil {

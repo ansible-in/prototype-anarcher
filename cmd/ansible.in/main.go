@@ -7,23 +7,30 @@ import (
 	"github.com/ansible-in/prototype-anarcher/ws"
 	"log"
 	"net/http"
+	"os"
 )
 
 var (
-	httpAddr = flag.String("http", ":5000", "HTTP service address")
+	host = flag.String("host", "", "HTTP service address")
+	port = flag.String("port", "5000", "HTTP service port")
 )
 
 func main() {
 	flag.Parse()
 	ansible.InitDB()
 
+	if os.Getenv("PORT") != "" {
+		*port = os.Getenv("PORT")
+	}
+	httpAddr := *host + ":" + *port
+
 	m := http.NewServeMux()
 	//m.Handle("/ws/",http.StripPrefix("/ws",ws.Handler()))
 	m.Handle("/ws/", ws.Handler())
 	m.Handle("/", web.Handler())
 
-	log.Print("Listening on ", *httpAddr)
-	err := http.ListenAndServe(*httpAddr, m)
+	log.Print("Listening on ", httpAddr)
+	err := http.ListenAndServe(httpAddr, m)
 	if err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}

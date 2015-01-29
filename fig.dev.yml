@@ -6,7 +6,9 @@ db:
         - "29015:29015"
 api:
     build: .
-    command: go run src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/main.go 
+    #command: go run src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/main.go 
+    working_dir: /go/src/github.com/ansible-in/prototype-anarcher/cmd/ansible.in/ 
+    command: gin -p 5000 -a 5001 -b /tmp/gen-bin
     volumes:
         - ../../../:/go/src
     links:
