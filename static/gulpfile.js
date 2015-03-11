@@ -65,18 +65,9 @@ gulp.task('watch',function() {
 gulp.task('webserver',function() {
     connect.server({
         root: "dest",
-        port: 6000,
-        fallback: "dest/index.html",
-        livereload: true,
-        middleware: function(connect, o) {
-            return [ (function() {
-                var url = require('url');
-                var proxy = require('proxy-middleware');
-                var options = url.parse('http://localhost:5000/api');
-                options.route = '/api';
-                return proxy(options);
-            })() ];
-        }
+//        port: 6000,
+//        fallback: "dest/index.html",
+        livereload: true
     });
 });
 

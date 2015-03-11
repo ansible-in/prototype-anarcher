@@ -1,0 +1,8 @@
+{
+    "port": 5000,
+    "proxy_to": {
+        "/" : "http://localhost:8080",
+        "/ws" : "http://localhost:8000",
+        "/api" : "http://localhost:8000"
+    }
+}
